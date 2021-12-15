@@ -61,5 +61,6 @@ function validateGesture(input) {
 module.exports = {
     Player,
     Human,
-    AI
+    AI,
+    promptValid
 }

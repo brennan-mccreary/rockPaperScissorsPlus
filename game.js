@@ -1,6 +1,7 @@
 "use strict";
 //imports
 const { Player, Human, AI } = require("./player");
+const { promptValid } = require("./player");
 const ps = require("prompt-sync");
 
 //declarations
@@ -232,15 +233,6 @@ class Game {
             this.playerTwo = new Human;
         }
     }
-}
-
-
-//validation measures
-function promptValid(question, valid) { //prompts for user input and validates against specific measures
-    do{
-      var response = promptSync(question).trim();
-    } while(!response || !valid(response));
-    return response;
 }
 
 function validateAI(input) {
