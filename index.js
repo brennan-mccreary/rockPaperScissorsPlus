@@ -10,7 +10,7 @@ const promptSync = ps();
 
 //start call
 let game = new Game();
-game.determineAI();
+game.setupGame();
 
 
 
