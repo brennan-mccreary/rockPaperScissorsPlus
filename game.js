@@ -16,7 +16,7 @@ class Game {
         this.playerTwo;
     }
     
-    setupGame() { //run game
+    setupGame() { //run pre-game setup
         this.displayRules();
 
         this.useAI = this.determineAI();
@@ -26,7 +26,7 @@ class Game {
         this.runGame(this.useAI);
     }
     
-    runGame(useAI) {
+    runGame(useAI) {//run game
         while(this.playerOne.score < 3 && this.playerTwo.score < 3) {
             if(useAI == true) {
                 console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
@@ -55,7 +55,7 @@ class Game {
         this.displayWinner(this.playerOne.score, this.playerTwo.score);
     }
 
-    determineRoundWinnner(gestureOne, gestureTwo) {
+    determineRoundWinnner(gestureOne, gestureTwo) {//apply game rules and determine round winner
         switch(gestureOne) {
             case "rock" : 
                 switch(gestureTwo) {
@@ -188,7 +188,7 @@ class Game {
     
     determineAI() { //determine PvP or PvAI
         console.log("Enter 'multiplayer' to play with 2 players,\nor 'singleplayer' to play against AI");
-        let choice = promptValid("--", validateAI);
+        let choice = promptValid("--", this.validateAI);
 
         switch(choice.toLowerCase()) {
             case "multiplayer" : return false;
@@ -199,14 +199,16 @@ class Game {
 
     displayWinner(scoreOne, scoreTwo) { //display the winner
         if(scoreOne > scoreTwo) {
+            console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
             console.log(`\nPlayer one wins the game!`);
           }
           else {
+            console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
             console.log(`\nPlayer two wins the game!`);
           }
     }
 
-    displayRules() {
+    displayRules() {//displays rule list
         console.log(`
         Game Rules:
         Rock crushes Scissors
@@ -223,7 +225,7 @@ class Game {
         `);
     }
 
-    initiatePlayers(useAI) {
+    initiatePlayers(useAI) {//defines players based on AI use case
         if(useAI == true) {
             this.playerOne = new Human;
             this.playerTwo = new AI;
@@ -233,16 +235,17 @@ class Game {
             this.playerTwo = new Human;
         }
     }
+
+    validateAI(input) { //validation function
+        if(input.toLowerCase() === "multiplayer" || input.toLowerCase() === "singleplayer" ) {
+            return true;
+        }
+        else {
+            console.log("Invalid response.");
+            return false;
+        } 
+    }
 }
 
-function validateAI(input) {
-    if(input.toLowerCase() === "multiplayer" || input.toLowerCase() === "singleplayer" ) {
-        return true;
-    }
-    else {
-        console.log("Invalid response.");
-        return false;
-    } 
-}
 //exports
 module.exports = Game;

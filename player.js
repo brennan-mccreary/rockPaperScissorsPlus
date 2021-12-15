@@ -12,6 +12,8 @@ class Player {
         this.gestureChoice;
         this.score = 0;
     }
+
+    
 }
 
 //sub classes
@@ -20,9 +22,20 @@ class Human extends Player {
         super();
     }
 
-    chooseGesture() {
+    chooseGesture() {//prompts user for gesture input
         console.log("Choose a gesture\n'Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'");
-        return (promptValid("--", validateGesture)).toLowerCase();
+        return (promptValid("--", this.validateGesture)).toLowerCase();
+    }
+
+    validateGesture(input) { //validation function
+        switch(input.toLowerCase()) {
+            case "rock" : return true;
+            case "paper" : return true;
+            case "scissors" : return true;
+            case "lizard" : return true;
+            case "spock" : return true;
+            default : console.log("Invalid Response."); return false;
+        }
     }
 }
 
@@ -31,30 +44,19 @@ class AI extends Player {
         super();
     }
 
-    chooseGesture(gestures) {
+    chooseGesture(gestures) {//randomly selects gesture from list
         let index = Math.floor((Math.random() * gestures.length));
         return gestures[index];
     }
 }
 
 
-//validation measures
+//validation measure
 function promptValid(question, valid) { //prompts for user input and validates against specific measures
     do{
       var response = promptSync(question).trim();
     } while(!response || !valid(response));
     return response;
-}
-
-function validateGesture(input) {
-    switch(input.toLowerCase()) {
-        case "rock" : return true;
-        case "paper" : return true;
-        case "scissors" : return true;
-        case "lizard" : return true;
-        case "spock" : return true;
-        default : console.log("Invalid Response."); return false;
-    }
 }
 
 //exports
