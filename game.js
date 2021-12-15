@@ -9,11 +9,12 @@ const promptSync = ps();
 
 //main class
 class Game {
-    constructor() {
+    constructor(rounds) {
         this.useAI;
         this.gestures = ["rock","paper","scissors","lizard","spock"]
         this.playerOne;
         this.playerTwo;
+        this.rounds = rounds;
     }
     
     setupGame() { //run pre-game setup
@@ -27,7 +28,7 @@ class Game {
     }
     
     runGame(useAI) {//run game
-        while(this.playerOne.score < 3 && this.playerTwo.score < 3) {
+        while(this.playerOne.score < this.rounds && this.playerTwo.score < this.rounds) {
             if(useAI == true) {
                 console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
     
