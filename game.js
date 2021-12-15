@@ -26,20 +26,32 @@ class Game {
     }
     
     runGame(useAI) {
-        if(useAI == true) {
-            console.log("Starting Game Against AI\n");
-
-            this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
-            console.log(`\nPlayer one (you) chose: ${this.playerOne.gestureChoice}`);
-
-            this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
-            console.log(`\nPlayer two (AI) chose: ${this.playerTwo.gestureChoice}`);
-
-            this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
+        while(this.playerOne.score < 3 && this.playerTwo.score < 3) {
+            if(useAI == true) {
+                console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
+    
+                this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
+                console.log(`\nPlayer one (you) chose: ${this.playerOne.gestureChoice}`);
+    
+                this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
+                console.log(`\nPlayer two (AI) chose: ${this.playerTwo.gestureChoice}`);
+    
+                this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
+            }
+            else {
+                console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
+    
+                this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
+                this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
+                
+                console.log(`\nPlayer one chose: ${this.playerOne.gestureChoice}`);
+                console.log(`\nPlayer two chose: ${this.playerTwo.gestureChoice}`);
+    
+                this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
+            }
         }
-        else {
-            console.log("Starting Game Against Player\n");
-        }
+        
+        this.displayWinner(this.playerOne.score, this.playerTwo.score);
     }
 
     determineRoundWinnner(gestureOne, gestureTwo) {
@@ -49,18 +61,22 @@ class Game {
                     case "paper" :
                         console.log("\nPaper covers rock");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "scissors" :
                         console.log("\nRock crushes scissors");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "lizard" :
                         console.log("\nRock crushes lizard");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "spock" :
                         console.log("\nSpock crushes rock");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
                 }
@@ -70,18 +86,22 @@ class Game {
                     case "rock" :
                         console.log("\nPaper covers rock");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "scissors" :
                         console.log("\nScissors cut paper");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "lizard" :
                         console.log("\nLizard eats paper");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "spock" :
                         console.log("\nPaper disproves spock");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
                 }
@@ -91,18 +111,22 @@ class Game {
                     case "rock" :
                         console.log("\nRock crushes scissors");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "paper" :
                         console.log("\nScissors cut paper");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "lizard" :
                         console.log("\nScissors decapitate lizard");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "spock" :
                         console.log("\nSpock crushes scissors");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
                 }
@@ -112,18 +136,22 @@ class Game {
                     case "rock" :
                         console.log("\nRock crushes lizard");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "paper" :
                         console.log("\nLizard eats paper");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "scissors" :
                         console.log("\nScissors decapitate lizard");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "spock" :
                         console.log("\nLizard poisons spock");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
                 }
@@ -133,18 +161,22 @@ class Game {
                     case "rock" :
                         console.log("\nSpock crushes rock");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "paper" :
                         console.log("\nPaper disproves spock");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     case "scissors" :
                         console.log("\nSpock crushes scissors");
                         console.log("Player one wins!");
+                        this.playerOne.score ++;
                         break;
                     case "lizard" :
                         console.log("\nLizard poisons spock");
                         console.log("Player two wins!");
+                        this.playerTwo.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
                 }
@@ -164,8 +196,13 @@ class Game {
         }
     }
 
-    displayWinner() { //display the winner
-
+    displayWinner(scoreOne, scoreTwo) { //display the winner
+        if(scoreOne > scoreTwo) {
+            console.log(`\nPlayer one wins the game!`);
+          }
+          else {
+            console.log(`\nPlayer two wins the game!`);
+          }
     }
 
     displayRules() {

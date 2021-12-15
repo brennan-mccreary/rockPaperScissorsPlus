@@ -17,7 +17,7 @@ class Player {
 //sub classes
 class Human extends Player {
     constructor() {
-        super(Player);
+        super();
     }
 
     chooseGesture() {
