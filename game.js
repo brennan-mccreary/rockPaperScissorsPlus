@@ -30,25 +30,11 @@ class Game {
     runGame(useAI) {//run game
         while(this.playerOne.score < this.rounds && this.playerTwo.score < this.rounds) {
             if(useAI == true) {
-                console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
-    
-                this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
-                console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
-    
-                this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
-                console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
-    
+                this.displayChoiceAndScore();
                 this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
             }
             else {
-                console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
-    
-                this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
-                this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
-                
-                console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
-                console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
-    
+                this.displayChoiceAndScore();
                 this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
             }
         }
@@ -207,6 +193,16 @@ class Game {
             console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
             console.log(`\n${this.playerTwo.name} wins the game!`);
           }
+    }
+
+    displayChoiceAndScore() {
+        console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
+    
+                this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
+                this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
+                
+                console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
+                console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
     }
 
     displayRules() {//displays rule list
