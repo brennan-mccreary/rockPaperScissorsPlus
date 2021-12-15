@@ -8,18 +8,17 @@ const promptSync = ps();
 
 //main class
 class Player {
-    constructor() {
+    constructor(name) {
+        this.name = name;
         this.gestureChoice;
         this.score = 0;
-    }
-
-    
+    } 
 }
 
 //sub classes
 class Human extends Player {
-    constructor() {
-        super();
+    constructor(name) {
+        super(name);
     }
 
     chooseGesture() {//prompts user for gesture input
@@ -40,8 +39,8 @@ class Human extends Player {
 }
 
 class AI extends Player {
-    constructor() {
-        super();
+    constructor(name) {
+        super(name);
     }
 
     chooseGesture(gestures) {//randomly selects gesture from list

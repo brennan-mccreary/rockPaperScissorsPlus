@@ -29,24 +29,24 @@ class Game {
     runGame(useAI) {//run game
         while(this.playerOne.score < 3 && this.playerTwo.score < 3) {
             if(useAI == true) {
-                console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
+                console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
     
                 this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
-                console.log(`\nPlayer one (you) chose: ${this.playerOne.gestureChoice}`);
+                console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
     
                 this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
-                console.log(`\nPlayer two (AI) chose: ${this.playerTwo.gestureChoice}`);
+                console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
     
                 this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
             }
             else {
-                console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
+                console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
     
                 this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
                 this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
                 
-                console.log(`\nPlayer one chose: ${this.playerOne.gestureChoice}`);
-                console.log(`\nPlayer two chose: ${this.playerTwo.gestureChoice}`);
+                console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
+                console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
     
                 this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
             }
@@ -61,22 +61,22 @@ class Game {
                 switch(gestureTwo) {
                     case "paper" :
                         console.log("\nPaper covers rock");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "scissors" :
                         console.log("\nRock crushes scissors");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "lizard" :
                         console.log("\nRock crushes lizard");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "spock" :
                         console.log("\nSpock crushes rock");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
@@ -86,22 +86,22 @@ class Game {
                 switch(gestureTwo) {
                     case "rock" :
                         console.log("\nPaper covers rock");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "scissors" :
                         console.log("\nScissors cut paper");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "lizard" :
                         console.log("\nLizard eats paper");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "spock" :
                         console.log("\nPaper disproves spock");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
@@ -111,22 +111,22 @@ class Game {
                 switch(gestureTwo) {
                     case "rock" :
                         console.log("\nRock crushes scissors");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "paper" :
                         console.log("\nScissors cut paper");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "lizard" :
                         console.log("\nScissors decapitate lizard");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "spock" :
                         console.log("\nSpock crushes scissors");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
@@ -136,22 +136,22 @@ class Game {
                 switch(gestureTwo) {
                     case "rock" :
                         console.log("\nRock crushes lizard");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "paper" :
                         console.log("\nLizard eats paper");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "scissors" :
                         console.log("\nScissors decapitate lizard");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "spock" :
                         console.log("\nLizard poisons spock");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
@@ -161,22 +161,22 @@ class Game {
                 switch(gestureTwo) {
                     case "rock" :
                         console.log("\nSpock crushes rock");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "paper" :
                         console.log("\nPaper disproves spock");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     case "scissors" :
                         console.log("\nSpock crushes scissors");
-                        console.log("Player one wins!");
+                        console.log(`${this.playerOne.name} wins!`);
                         this.playerOne.score ++;
                         break;
                     case "lizard" :
                         console.log("\nLizard poisons spock");
-                        console.log("Player two wins!");
+                        console.log(`${this.playerTwo.name} wins!`);
                         this.playerTwo.score ++;
                         break;
                     default : console.log("\nIt was a draw!");
@@ -199,12 +199,12 @@ class Game {
 
     displayWinner(scoreOne, scoreTwo) { //display the winner
         if(scoreOne > scoreTwo) {
-            console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
-            console.log(`\nPlayer one wins the game!`);
+            console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
+            console.log(`\n${this.playerOne.name} wins the game!`);
           }
           else {
-            console.log(`\nPlayer One: ${this.playerOne.score}\nPlayer Two: ${this.playerTwo.score}`);
-            console.log(`\nPlayer two wins the game!`);
+            console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
+            console.log(`\n${this.playerTwo.name} wins the game!`);
           }
     }
 
@@ -227,12 +227,12 @@ class Game {
 
     initiatePlayers(useAI) {//defines players based on AI use case
         if(useAI == true) {
-            this.playerOne = new Human;
-            this.playerTwo = new AI;
+            this.playerOne = new Human(promptSync("Enter your name: "));
+            this.playerTwo = new AI("AI");
         }
         else {
-            this.playerOne = new Human;
-            this.playerTwo = new Human;
+            this.playerOne = new Human(promptSync("Player one enter your name: "));
+            this.playerTwo = new Human(promptSync("Player two enter your name: "));
         }
     }
 
