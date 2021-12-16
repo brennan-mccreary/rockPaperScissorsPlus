@@ -1,6 +1,5 @@
 "use strict";
 const { Human, AI } = require("./player");
-const Game = require("./game"); 
 
 
 //Parent class

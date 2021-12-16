@@ -19,8 +19,3 @@ function validateRounds(input) {
         return false;
     }
 }
-
-//export
-module.exports = {
-    game,
-}

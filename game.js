@@ -28,7 +28,7 @@ class Game {
         this.runGame();
     }
     
-    runGame() {//run game
+    runGame() { //run game
         while(this.playerOne.score < this.rounds && this.playerTwo.score < this.rounds) {
             this.displayChoiceAndScore();
                 let win = this.gestures[0].canBeat(this.playerOne.gestureChoice, this.playerTwo.gestureChoice)
