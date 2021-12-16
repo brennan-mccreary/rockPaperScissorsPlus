@@ -45,7 +45,7 @@ class AI extends Player {
 
     chooseGesture(gestures) {//randomly selects gesture from list
         let index = Math.floor((Math.random() * gestures.length));
-        return gestures[index];
+        return gestures[index].name;
     }
 }
 

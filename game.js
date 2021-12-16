@@ -1,6 +1,7 @@
 "use strict";
 //imports
-const { Player, Human, AI } = require("./player");
+const { Rock, Paper, Scissors, Lizard, Spock } = require("./gestures");
+const { Human, AI } = require("./player");
 const { promptValid } = require("./player");
 const ps = require("prompt-sync");
 
@@ -11,7 +12,7 @@ const promptSync = ps();
 class Game {
     constructor(rounds) {
         this.useAI;
-        this.gestures = ["rock","paper","scissors","lizard","spock"]
+        this.gestures = [new Rock, new Paper, new Scissors, new Lizard, new Spock]
         this.playerOne;
         this.playerTwo;
         this.rounds = rounds;
@@ -31,11 +32,29 @@ class Game {
         while(this.playerOne.score < this.rounds && this.playerTwo.score < this.rounds) {
             if(useAI == true) {
                 this.displayChoiceAndScore();
-                this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
+                let win = this.gestures[0].canBeat(this.playerOne.gestureChoice, this.playerTwo.gestureChoice)
+                if(win === true) {
+                    console.log(`${this.playerOne.name} wins!`);
+                    this.playerOne.score ++;
+                }
+                else {
+                    console.log(`${this.playerTwo.name} wins!`);
+                    this.playerTwo.score ++;
+                }
+                // this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
             }
             else {
                 this.displayChoiceAndScore();
-                this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
+                let win = this.gestures[0].canBeat(this.playerOne.gestureChoice, this.playerTwo.gestureChoice)
+                if(win === true) {
+                    console.log(`${this.playerOne.name} wins!`);
+                    this.playerOne.score ++;
+                }
+                else {
+                    console.log(`${this.playerTwo.name} wins!`);
+                    this.playerTwo.score ++;
+                }
+                // this.determineRoundWinnner(this.playerOne.gestureChoice, this.playerTwo.gestureChoice);
             }
         }
         
