@@ -1,7 +1,7 @@
 "use strict";
 const { Human, AI } = require("./player");
 const Game = require("./game"); 
-const game = require("./index");
+
 
 //Parent class
 class Gestures {
