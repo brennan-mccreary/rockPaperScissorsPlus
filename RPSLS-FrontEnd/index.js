@@ -4,7 +4,7 @@ function app() {
     let rounds = document.getElementById("rounds").value;
     // alert(`Hello, ${name}, ${rounds} rounds today?`);
     
-    showRulesHTML();
+    
     hideInitialHTML();
     
 
@@ -23,7 +23,7 @@ class Game {
     }
 
     setupGame(name) { //run pre-game setup
-        this.displayRules();
+        showRulesHTML();
 
         //this.useAI = this.determineAI();
         this.useAI = true;
@@ -41,9 +41,12 @@ class Game {
                     console.log(`${this.playerOne.name} wins!`);
                     this.playerOne.score ++;
                 }
-                else {
+                else if(win === false){
                     console.log(`${this.playerTwo.name} wins!`);
                     this.playerTwo.score ++;
+                }
+                else {
+                    console.log(`\nDraw`);
                 }
         }
         
@@ -82,24 +85,6 @@ class Game {
                 
                 console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
                 console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
-    }
-
-    displayRules() {//displays rule list
-
-        console.log(`
-        Game Rules:
-        Rock crushes Scissors
-        Scissors cuts Paper
-        Paper covers Rock
-        Rock crushes Lizard
-        Lizard poisons Spock
-        Spock smashes Scissors
-        Scissors decapitates Lizard
-        Lizard eats Paper
-        Paper disproves Spock
-        Spock vaporizes Rock
-        
-        `);
     }
 
     initiatePlayers(useAI, name) {//defines players based on AI use case
@@ -178,8 +163,10 @@ class Gestures {
 
     canBeat(choiceOne, choiceTwo) {
         let beatBy = this.canBeatList(choiceOne);
-
-        if(beatBy.includes(choiceTwo) === true) {
+        if(choiceOne === choiceTwo) {
+            return "draw";
+        }
+        else if(beatBy.includes(choiceTwo) === true) {
             console.log(`\n${choiceTwo} beats ${choiceOne}`);
             return false;
         }
