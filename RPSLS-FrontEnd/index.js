@@ -1,23 +1,16 @@
 "use strict";
+function app() {
+    let name = document.getElementById("pName").value;
+    let rounds = document.getElementById("rounds").value;
+    // alert(`Hello, ${name}, ${rounds} rounds today?`);
+    
+    showRulesHTML();
+    hideInitialHTML();
+    
 
-
-//index ----------------------------------------
-//start call
-let game = new Game(promptValid("Number of rounds: ", validateRounds));
-game.setupGame();
-
-//validation function
-function validateRounds(input) {
-    input = parseInt(input);
-    if(input > 0 && isNaN(input) === false) {
-        return true;
-    }
-    else {
-        console.log("Number of rounds must be higher than 1");
-        return false;
-    }
+    let game = new Game(rounds);
+    game.setupGame(name);
 }
-
 //Game classes ----------------------------------------
 //Parent class
 class Game {
@@ -28,13 +21,14 @@ class Game {
         this.playerTwo;
         this.rounds = rounds;
     }
-    
-    setupGame() { //run pre-game setup
+
+    setupGame(name) { //run pre-game setup
         this.displayRules();
 
-        this.useAI = this.determineAI();
+        //this.useAI = this.determineAI();
+        this.useAI = true;
 
-        this.initiatePlayers(this.useAI);
+        this.initiatePlayers(this.useAI, name);
 
         this.runGame();
     }
@@ -57,8 +51,7 @@ class Game {
     }
     
     determineAI() { //determine PvP or PvAI
-        console.log("Enter 'multiplayer' to play with 2 players,\nor 'singleplayer' to play against AI");
-        let choice = promptValid("--", this.validateAI);
+        let choice = promptValid("Enter 'multiplayer' to play with 2 players,\nor 'singleplayer' to play against AI", this.validateAI);
 
         switch(choice.toLowerCase()) {
             case "multiplayer" : return false;
@@ -71,11 +64,14 @@ class Game {
         if(scoreOne > scoreTwo) {
             console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
             console.log(`\n${this.playerOne.name} wins the game!`);
-          }
-          else {
+        }
+        else {
             console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
             console.log(`\n${this.playerTwo.name} wins the game!`);
-          }
+        }
+
+        hideRulesHTML();
+        showInitialHTML();
     }
 
     displayChoiceAndScore() {
@@ -89,6 +85,7 @@ class Game {
     }
 
     displayRules() {//displays rule list
+
         console.log(`
         Game Rules:
         Rock crushes Scissors
@@ -105,9 +102,9 @@ class Game {
         `);
     }
 
-    initiatePlayers(useAI) {//defines players based on AI use case
+    initiatePlayers(useAI, name) {//defines players based on AI use case
         if(useAI == true) {
-            this.playerOne = new Human(prompt("Enter your name: "));
+            this.playerOne = new Human(name);
             this.playerTwo = new AI("AI");
         }
         else {
@@ -145,8 +142,7 @@ class Human extends Player {
     }
 
     chooseGesture() {//prompts user for gesture input
-        console.log("Choose a gesture\n'Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'");
-        return (promptValid("--", this.validateGesture)).toLowerCase();
+        return (promptValid("Choose a gesture\n'Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'", this.validateGesture)).toLowerCase();
     }
 
     validateGesture(input) { //validation function
@@ -170,15 +166,6 @@ class AI extends Player {
         let index = Math.floor((Math.random() * gestures.length));
         return gestures[index].name;
     }
-}
-
-
-//validation measure
-function promptValid(question, valid) { //prompts for user input and validates against specific measures
-    do{
-      var response = prompt(question).trim();
-    } while(!response || !valid(response));
-    return response;
 }
 
 
@@ -258,5 +245,57 @@ class Spock extends Gestures {
     constructor() {
         super();
         this.name = "spock"
+    }
+}
+
+//index ----------------------------------------
+//start call
+// let game = new Game(promptValid("Number of rounds: ", validateRounds));
+// game.setupGame();
+
+//validation function
+function validateRounds(input) {
+    input = parseInt(input);
+    if(input > 0 && isNaN(input) === false) {
+        return true;
+    }
+    else {
+        console.log("Number of rounds must be higher than 1");
+        return false;
+    }
+}
+
+//validation measure
+function promptValid(question, valid) { //prompts for user input and validates against specific measures
+    do{
+      var response = prompt(question).trim();
+    } while(!response || !valid(response));
+    return response;
+}
+
+//show and hide functions
+function showInitialHTML() {
+    let arr = document.getElementsByName("initial");
+        for(let i = 0; i < arr.length; i ++) {
+            arr[i].hidden = false;
+        }
+}
+function hideInitialHTML() {
+    let arr = document.getElementsByName("initial");
+    for(let i = 0; i < arr.length; i ++) {
+        arr[i].hidden = true;
+    }
+}
+
+function showRulesHTML() {
+    let arr = document.getElementsByClassName("rules");
+    for(let i = 0; i < arr.length; i ++) {
+        arr[i].hidden = false;
+    }
+}
+function hideRulesHTML() {
+    let arr = document.getElementsByClassName("rules");
+    for(let i = 0; i < arr.length; i ++) {
+        arr[i].hidden = true;
     }
 }

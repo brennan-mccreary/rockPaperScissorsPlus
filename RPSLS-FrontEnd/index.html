@@ -8,5 +8,28 @@
 </head>
 <body>
     <script src = "index.js"></script>
+    <div class="rules" hidden=true>
+        <p>
+            Game Rules:<br>
+            Rock crushes Scissors<br>
+            Scissors cuts Paper<br>
+            Paper covers Rock<br>
+            Rock crushes Lizard<br>
+            Lizard poisons Spock<br>
+            Spock smashes Scissors<br>
+            Scissors decapitates Lizard<br>
+            Lizard eats Paper<br>
+            Paper disproves Spock<br>
+            Spock vaporizes Rock<br>
+        </p>
+    </div>
+    <form>
+        <label for="pName" name="initial">Enter Player Name</label><br>
+        <input type="text" id="pName" name="initial"><br><br>
+        <label for="rounds" name="initial">Enter Number of Rounds</label><br>
+        <input type="text" id="rounds" name="initial"><br><br>
+        <input type="button" value="Enter" id="start" onclick="app()" name="initial">
+    </form>
+
 </body>
 </html>
