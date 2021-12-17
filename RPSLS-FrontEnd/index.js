@@ -1,14 +1,15 @@
 "use strict";
 function app() {
+    
     let name = document.getElementById("pName").value;
     let rounds = document.getElementById("rounds").value;
     // alert(`Hello, ${name}, ${rounds} rounds today?`);
     
     
     hideInitialHTML();
-    
+    showGestureHTML();
 
-    let game = new Game(rounds);
+    game = new Game(rounds);
     game.setupGame(name);
 }
 //Game classes ----------------------------------------
@@ -30,27 +31,26 @@ class Game {
 
         this.initiatePlayers(this.useAI, name);
 
-        this.runGame();
+        //this.runGame();
     }
     
-    runGame() {//run game
-        while(this.playerOne.score < this.rounds && this.playerTwo.score < this.rounds) {
-            this.displayChoiceAndScore();
-                let win = this.gestures[0].canBeat(this.playerOne.gestureChoice, this.playerTwo.gestureChoice)
-                if(win === true) {
-                    console.log(`${this.playerOne.name} wins!`);
-                    this.playerOne.score ++;
-                }
-                else if(win === false){
-                    console.log(`${this.playerTwo.name} wins!`);
-                    this.playerTwo.score ++;
-                }
-                else {
-                    console.log(`\nDraw`);
-                }
+    runGame(choice) {//run game
+        this.displayChoice(choice);
+        let win = this.gestures[0].canBeat(this.playerOne.gestureChoice, this.playerTwo.gestureChoice)
+        if(win === true) {
+            console.log(`${this.playerOne.name} wins!`);
+            this.playerOne.score ++;
         }
-        
-        this.displayWinner(this.playerOne.score, this.playerTwo.score);
+        else if(win === false){
+                console.log(`${this.playerTwo.name} wins!`);
+            this.playerTwo.score ++;
+        }
+        else {
+            console.log(`\nDraw`);
+        }
+            
+        this.displayScore();
+        this.displayWinner();
     }
     
     determineAI() { //determine PvP or PvAI
@@ -64,27 +64,38 @@ class Game {
     }
 
     displayWinner(scoreOne, scoreTwo) { //display the winner
-        if(scoreOne > scoreTwo) {
-            console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
-            console.log(`\n${this.playerOne.name} wins the game!`);
+        if(this.playerOne.score < this.rounds && this.playerTwo.score < this.rounds) {
+            
         }
         else {
-            console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
-            console.log(`\n${this.playerTwo.name} wins the game!`);
+            if(scoreOne > scoreTwo) {
+                console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
+                console.log(`\n${this.playerOne.name} wins the game!`);
+            }
+            else {
+                console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
+                console.log(`\n${this.playerTwo.name} wins the game!`);
+            }
+            hideRulesHTML();
+            hideGestureHTML();
+            showInitialHTML();
         }
-
-        hideRulesHTML();
-        showInitialHTML();
+        
+        
     }
 
-    displayChoiceAndScore() {
+    displayScore() {
         console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
+    }
+
+    displayChoice(choice) {
+        //console.log(`\n${this.playerOne.name}: ${this.playerOne.score}\n${this.playerTwo.name}: ${this.playerTwo.score}`);
     
-                this.playerOne.gestureChoice = this.playerOne.chooseGesture(this.gestures);
-                this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
+        this.playerOne.gestureChoice = this.playerOne.chooseGesture(choice);
+        this.playerTwo.gestureChoice = this.playerTwo.chooseGesture(this.gestures);
                 
-                console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
-                console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
+        console.log(`\n${this.playerOne.name} chose: ${this.playerOne.gestureChoice}`);
+        console.log(`\n${this.playerTwo.name} chose: ${this.playerTwo.gestureChoice}`);
     }
 
     initiatePlayers(useAI, name) {//defines players based on AI use case
@@ -126,8 +137,15 @@ class Human extends Player {
         super(name);
     }
 
-    chooseGesture() {//prompts user for gesture input
-        return (promptValid("Choose a gesture\n'Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'", this.validateGesture)).toLowerCase();
+    chooseGesture(choice) {//prompts user for gesture input
+        let input;
+        if(choice === "") {
+            input = (promptValid("Choose a gesture\n'Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'", this.validateGesture)).toLowerCase();
+        }
+        else {
+            input = choice;
+        }
+        return input;
     }
 
     validateGesture(input) { //validation function
@@ -262,13 +280,13 @@ function promptValid(question, valid) { //prompts for user input and validates a
 
 //show and hide functions
 function showInitialHTML() {
-    let arr = document.getElementsByName("initial");
+    let arr = document.getElementsByClassName("initial");
         for(let i = 0; i < arr.length; i ++) {
             arr[i].hidden = false;
         }
 }
 function hideInitialHTML() {
-    let arr = document.getElementsByName("initial");
+    let arr = document.getElementsByClassName("initial");
     for(let i = 0; i < arr.length; i ++) {
         arr[i].hidden = true;
     }
@@ -286,3 +304,27 @@ function hideRulesHTML() {
         arr[i].hidden = true;
     }
 }
+
+function showGestureHTML() {
+    let arr = document.getElementsByClassName("gestures");
+    for(let i = 0; i < arr.length; i ++) {
+        arr[i].hidden = false;
+    }
+    
+}
+function hideGestureHTML() {
+    let arr = document.getElementsByClassName("gestures");
+    for(let i = 0; i < arr.length; i ++) {
+        arr[i].hidden = true;
+    }
+}
+
+function getGestureChoice() {
+    let choice = document.getElementById("gestureChoice").value;
+    
+    game.runGame(choice);
+    
+}
+
+//declare game
+let game;

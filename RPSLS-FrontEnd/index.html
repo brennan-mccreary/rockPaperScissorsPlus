@@ -23,13 +23,22 @@
             Spock vaporizes Rock<br>
         </p>
     </div>
-    <form>
-        <label for="pName" name="initial">Enter Player Name</label><br>
-        <input type="text" id="pName" name="initial"><br><br>
-        <label for="rounds" name="initial">Enter Number of Rounds</label><br>
-        <input type="text" id="rounds" name="initial"><br><br>
-        <input type="button" value="Enter" id="start" onclick="app()" name="initial">
-    </form>
+    <div class="initial">
+        <form>
+            <label for="pName">Enter Player Name</label><br>
+            <input type="text" id="pName"><br><br>
+            <label for="rounds">Enter Number of Rounds</label><br>
+            <input type="text" id="rounds"><br><br>
+            <input type="button" value="Enter" id="start" onclick="app()" >
+        </form>
+    </div>
+    <div class="gestures" hidden=true>
+        <form>
+            <label for="gesture" name="gesture">Choose a gesture<br>'Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'</label><br>
+            <input type="text" name="gesture" id="gestureChoice" value="rock"><br><br>
+            <input type="button" value="Choose" id="start" name="gesture" onclick="getGestureChoice()">
+        </form>
+    </div>
 
 </body>
 </html>
