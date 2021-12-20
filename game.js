@@ -36,9 +36,12 @@ class Game {
                     console.log(`${this.playerOne.name} wins!`);
                     this.playerOne.score ++;
                 }
-                else {
+                else if(win === false){
                     console.log(`${this.playerTwo.name} wins!`);
-                    this.playerTwo.score ++;
+                this.playerTwo.score ++;
+                }
+                else {
+                    console.log(`\nDraw`);
                 }
         }
         

@@ -12,7 +12,10 @@ class Gestures {
     canBeat(choiceOne, choiceTwo) {
         let beatBy = this.canBeatList(choiceOne);
 
-        if(beatBy.includes(choiceTwo) === true) {
+        if(choiceOne === choiceTwo) {
+            return "draw";
+        }
+        else if(beatBy.includes(choiceTwo) === true) {
             console.log(`\n${choiceTwo} beats ${choiceOne}`);
             return false;
         }
